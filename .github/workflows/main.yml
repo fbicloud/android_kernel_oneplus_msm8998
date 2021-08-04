@@ -48,7 +48,7 @@ jobs:
           export PATH="${HOME}/${GCC}/bin:$PATH"
           export CROSS_COMPILE="aarch64-none-linux-gnu-"
           cd ${GITHUB_WORKSPACE}
-          export args="-j32 \
+          export args="-j16 \
           O=out"
           make ${args} docker_defconfig
           make ${args}
