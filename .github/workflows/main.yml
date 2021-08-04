@@ -52,9 +52,24 @@ jobs:
           O=out"
           make ${args} docker_defconfig
           make ${args}
+          zip -r kernel.zip arch/arm64/boot/Image.gz-dtb
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+
+      - name: create github release
+        id: create-new-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: ${GITHUB_WORKSPACE}/arch/arm64/boot/Image.gz-dtb
+          tag_name: v${{ github.run_number }}
+          release_name: Release V${{ github.run_number }}
+
+      - name: upload
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-new-release.outputs.upload_url }}
+          asset_path: kernel.zip
+          asset_name: op5-q-v${{ github.run_number }}.zip
+          asset_content_type: application/zip
