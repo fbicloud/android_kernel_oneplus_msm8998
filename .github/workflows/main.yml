@@ -28,25 +28,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Apt Update
         run: |
-          sudo apt update -y
-          sudo apt install -y gcc g++ python make texinfo texlive bc bison build-essential ccache curl flex g++-multilib gcc-multilib git gnupg gperf imagemagick lib32ncurses5-dev lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libssl-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool squashfs-tools xsltproc zip zlib1g-dev unzip language-pack-zh-hans
-
-      - name: Download Arm Gcc
-        run: |
-          cd ${HOME}
-          export GCC="gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu"
-          wget "https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.07/binrel/${GCC}.tar.xz"
-          xz -d ${GCC}.tar.xz
-          tar xvf ${GCC}.tar
-          rm -rf ${GCC}.tar
-          export ARCH="arm64"
-          export PATH="${HOME}/${GCC}/bin:$PATH"
-          export CROSS_COMPILE="aarch64-none-linux-gnu-"
-
-      - name: Make
-        run: |
-          cd ${GITHUB_WORKSPACE}
-          export args="-j32 \
-          O=out"
-          make ${args} docker_defconfig
-          make ${args}
+          echo ${HOME}
+          echo ${GITHUB_WORKSPACE}
+          ls ${GITHUB_WORKSPACE}
