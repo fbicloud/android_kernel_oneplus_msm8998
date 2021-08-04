@@ -46,7 +46,7 @@ jobs:
       - name: Make
         run: |
           cd ${GITHUB_WORKSPACE}
-          export args = "-j32 \
+          export args="-j32 \
           O=out"
           make ${args} docker_defconfig
           make ${args}
