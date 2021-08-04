@@ -52,7 +52,9 @@ jobs:
           O=out"
           make ${args} docker_defconfig
           make ${args}
-          zip -r kernel.zip out/arch/arm64/boot/Image.gz-dtb
+          cd out/arch/arm64/boot
+          zip -r kernel.zip Image.gz-dtb
+          mv kernel.zip ${GITHUB_WORKSPACE}
 
 
       - name: create github release
