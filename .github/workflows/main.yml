@@ -28,6 +28,14 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Apt Update
         run: |
-          echo ${HOME}
-          echo ${GITHUB_WORKSPACE}
-          ls ${GITHUB_WORKSPACE}
+          cd ${HOME}
+          export GCC="gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu"
+          wget "https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.07/binrel/${GCC}.tar.xz"
+          xz -d ${GCC}.tar.xz
+          tar xvf ${GCC}.tar
+          rm -rf ${GCC}.tar
+          export ARCH="arm64"
+          export PATH="${HOME}/${GCC}/bin:$PATH"
+          export CROSS_COMPILE="aarch64-none-linux-gnu-"
+          echo $ARCH
+          echo $PATH
