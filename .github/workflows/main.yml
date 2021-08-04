@@ -39,3 +39,8 @@ jobs:
           export CROSS_COMPILE="aarch64-none-linux-gnu-"
           echo $ARCH
           echo $PATH
+      - name: Make
+        run: |
+          echo $ARCH
+          echo $PATH
+          
